@@ -8,18 +8,10 @@
 import SwiftUI
 
 struct CardThumbnail: View {
-    func onTapGesture() {
-     isPresented = true
-    }
-    @State private var isPresented = false
     
     var body: some View {
         RoundedRectangle(cornerRadius: 15)
             .foregroundColor(.gray)
             .frame(width: 150, height: 250)
-            .onTapGesture {
-                isPresented = true
-            }
     }
-    }
-
+}
