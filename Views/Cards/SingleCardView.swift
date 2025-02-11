@@ -50,9 +50,16 @@ struct SingleCardView: View {
         }
     }
 }
-
-struct SingleCardView_Previews: PreviewProvider {
-    static var previews: some View {
-        SingleCardView()
+struct SingleCardView: PreviewProvider {
+    struct SingleCardView(card: initialCards[0]): View {
+        @EnvironmentObject var store: CardStore
+        var body: some View {
+            SingleCardView(card: $store.cards[0])
+        }
     }
 }
+static var previews: some View {
+    SingleCardPreview()
+        .environmentObject(CardStore(defaultData: true))
+}
+

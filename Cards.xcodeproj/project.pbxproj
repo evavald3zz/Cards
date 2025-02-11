@@ -75,7 +75,7 @@
 		54A284502D54572B00BCEB22 = {
 			isa = PBXGroup;
 			children = (
-				54A2845B2D54572B00BCEB22 /* Cards */,
+				54A285142D5C010D00BCEB22 /* Views */,
 				54A2846C2D54572E00BCEB22 /* CardsTests */,
 				54A284762D54572E00BCEB22 /* CardsUITests */,
 				54A2845A2D54572B00BCEB22 /* Products */,
@@ -90,6 +90,14 @@
 				54A284732D54572E00BCEB22 /* CardsUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		54A285142D5C010D00BCEB22 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				54A2845B2D54572B00BCEB22 /* Cards */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
