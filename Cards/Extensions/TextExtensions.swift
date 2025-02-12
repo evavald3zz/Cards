@@ -7,12 +7,11 @@
 
 import SwiftUI
 
-struct TextExtensions: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+extension Text {
+    func scalableText(font: Font = Font.system(size: 1000)) -> some View {
+        self
+            .font(font)
+            .minimumScaleFactor(0.01)
+            .lineLimit(1)
     }
-}
-
-#Preview {
-    TextExtensions()
 }

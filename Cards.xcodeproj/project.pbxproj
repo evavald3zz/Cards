@@ -29,9 +29,22 @@
 		54A284732D54572E00BCEB22 /* CardsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CardsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		54A285892D5D1D9F00BCEB22 /* Exceptions for "Cards" folder in "Cards" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 54A284582D54572B00BCEB22 /* Cards */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		54A2845B2D54572B00BCEB22 /* Cards */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				54A285892D5D1D9F00BCEB22 /* Exceptions for "Cards" folder in "Cards" target */,
+			);
 			path = Cards;
 			sourceTree = "<group>";
 		};
@@ -75,7 +88,7 @@
 		54A284502D54572B00BCEB22 = {
 			isa = PBXGroup;
 			children = (
-				54A285142D5C010D00BCEB22 /* Views */,
+				54A2845B2D54572B00BCEB22 /* Cards */,
 				54A2846C2D54572E00BCEB22 /* CardsTests */,
 				54A284762D54572E00BCEB22 /* CardsUITests */,
 				54A2845A2D54572B00BCEB22 /* Products */,
@@ -90,14 +103,6 @@
 				54A284732D54572E00BCEB22 /* CardsUITests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		54A285142D5C010D00BCEB22 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				54A2845B2D54572B00BCEB22 /* Cards */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -406,9 +411,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Cards/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cards/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -434,9 +439,9 @@
 				DEVELOPMENT_ASSET_PATHS = "\"Cards/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Cards/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

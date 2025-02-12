@@ -8,58 +8,27 @@
 import SwiftUI
 
 struct SingleCardView: View {
-    @Environment(\.dismiss) var dismiss
+    @Binding var card: Card
     @State private var currentModal: ToolbarSelection?
     
     var body: some View {
         NavigationStack {
-            content
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button("Done") {
-                            dismiss()
-                        }
-                    }
-                    ToolbarItem(placement: .bottomBar) {
-                        BottomToolbar(modal: $currentModal)
-                    }
-                }
-                .sheet(item: $currentModal) { item in
-                    switch item {
-                    default:
-                        Text(String(describing: item))
-                    }
-                }
-        }
-    }
-    var content: some View {
-        ZStack {
-            Group {
-                Capsule()
-                    .foregroundColor(.yellow)
-                Text("Resize Me!")
-                    .fontWeight(.bold)
-                    .font(.system(size: 500))
-                    .minimumScaleFactor(0.01)
-                    .lineLimit(1)
-            }
-            .resizableView()
-            Circle()
-                .resizableView()
-                .offset(CGSize(width: 50, height: 200))
-        }
+            CardDetailView(card: $card)
+                .modifier(CardToolbar(
+                 currentModal: $currentModal,
+                 card: $card))        }
     }
 }
-struct SingleCardView: PreviewProvider {
-    struct SingleCardView(card: initialCards[0]): View {
+
+struct SingleCardView_Previews: PreviewProvider {
+    struct SingleCardPreview: View {
         @EnvironmentObject var store: CardStore
         var body: some View {
             SingleCardView(card: $store.cards[0])
         }
     }
+    static var previews: some View {
+        SingleCardPreview()
+            .environmentObject(CardStore(defaultData: true))
+    }
 }
-static var previews: some View {
-    SingleCardPreview()
-        .environmentObject(CardStore(defaultData: true))
-}
-
