@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		54A2871E2D5D411100BCEB22 /* Stickers in Resources */ = {isa = PBXBuildFile; fileRef = 54A2871D2D5D410C00BCEB22 /* Stickers */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		54A2846A2D54572E00BCEB22 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -27,6 +31,7 @@
 		54A284592D54572B00BCEB22 /* Cards.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cards.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54A284692D54572E00BCEB22 /* CardsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CardsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		54A284732D54572E00BCEB22 /* CardsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CardsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		54A2871D2D5D410C00BCEB22 /* Stickers */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Stickers; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -88,6 +93,7 @@
 		54A284502D54572B00BCEB22 = {
 			isa = PBXGroup;
 			children = (
+				54A2871D2D5D410C00BCEB22 /* Stickers */,
 				54A2845B2D54572B00BCEB22 /* Cards */,
 				54A2846C2D54572E00BCEB22 /* CardsTests */,
 				54A284762D54572E00BCEB22 /* CardsUITests */,
@@ -225,6 +231,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54A2871E2D5D411100BCEB22 /* Stickers in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
