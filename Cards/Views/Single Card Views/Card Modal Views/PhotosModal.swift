@@ -30,8 +30,10 @@ struct PhotosModal: View {
                                 }
                             case .failure(let failure):
                                 fatalError("Image transfer failed: \(failure)")
-                            }                        }
-                    }                }
+                            }
+                        }
+                    }
+                }
                 selectedItems = []
             }
     }

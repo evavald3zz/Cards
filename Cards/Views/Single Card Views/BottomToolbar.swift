@@ -34,6 +34,7 @@ struct ToolbarButton: View {
 struct BottomToolbar: View {
     @Binding var card: Card
     @Binding var modal: ToolbarSelection?
+    @EnvironmentObject var store: CardStore
     
     var body: some View {
         HStack {
@@ -44,15 +45,22 @@ struct BottomToolbar: View {
                     } label: {
                         PhotosModal(card: $card)
                     }
+                case .frameModal:
+                    defaultButton(selection)
+                        .disabled(
+                            store.selectedElement == nil
+                            || !(store.selectedElement is ImageElement))
                 default:
-                    Button {
-                        modal = selection
-                    } label: {
-                        ToolbarButton(modal: selection)
-                    }
-                }
+                    defaultButton(selection)
                 }
             }
+        }
+    }
+    func defaultButton(_ selection: ToolbarSelection) -> some View {
+        Button {
+            modal = selection
+        } label: {
+            ToolbarButton(modal: selection)
         }
     }
     
@@ -61,6 +69,8 @@ struct BottomToolbar: View {
             BottomToolbar(
                 card: .constant(Card()),
                 modal: .constant(.stickerModal))
+            .environmentObject(CardStore())
             .padding()
         }
     }
+}

@@ -11,11 +11,21 @@ struct CardDetailView: View {
     @EnvironmentObject var store: CardStore
     @Binding var card: Card
     
+    func isSelected(_ element: CardElement) -> Bool {
+        store.selectedElement?.id == element.id
+    }
+    
     var body: some View {
         ZStack {
             card.backgroundColor
+                .onTapGesture {
+                    store.selectedElement = nil
+                }
             ForEach($card.elements, id: \.id) { $element in
                 CardElementView(element: element)
+                    .border(
+                        Settings.borderColor,
+                        width: isSelected(element) ? Settings.borderWidth : 0)
                     .elementContextMenu(
                         card: $card,
                         element: $element)
@@ -23,9 +33,14 @@ struct CardDetailView: View {
                     .frame(
                         width: element.transform.size.width,
                         height: element.transform.size.height)
+                    .onTapGesture {
+                        store.selectedElement = element
+                    }
             }
         }
-        
+        .onDisappear {
+            store.selectedElement = nil
+        }
         .dropDestination(for: CustomTransfer.self) { items, location in
             print(location)
             Task {
@@ -35,6 +50,7 @@ struct CardDetailView: View {
         }
     }
 }
+
 struct CardDetailView_Previews: PreviewProvider {
     struct CardDetailPreview: View {
         @EnvironmentObject var store: CardStore
@@ -42,6 +58,7 @@ struct CardDetailView_Previews: PreviewProvider {
             CardDetailView(card: $store.cards[0])
         }
     }
+    
     static var previews: some View {
         CardDetailPreview()
             .environmentObject(CardStore(defaultData: true))

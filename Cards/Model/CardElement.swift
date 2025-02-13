@@ -17,16 +17,17 @@ extension CardElement {
     }
 }
 struct ImageElement: CardElement {
-  let id = UUID()
-  var transform = Transform()
-  var uiImage: UIImage?
-
-  var image: Image {
-    Image(
-      uiImage: uiImage ??
-        UIImage(named: "error-image") ??
-        UIImage())
-  }
+    let id = UUID()
+    var transform = Transform()
+    var uiImage: UIImage?
+    var frameIndex: Int?
+    
+    var image: Image {
+        Image(
+            uiImage: uiImage ??
+            UIImage(named: "error-image") ??
+            UIImage())
+    }
 }
 
 struct TextElement: CardElement {
