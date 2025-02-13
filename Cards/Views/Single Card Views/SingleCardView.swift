@@ -16,7 +16,8 @@ struct SingleCardView: View {
             CardDetailView(card: $card)
                 .modifier(CardToolbar(
                  currentModal: $currentModal,
-                 card: $card))        }
+                 card: $card))
+        }
     }
 }
 

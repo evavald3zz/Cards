@@ -12,14 +12,15 @@ struct Card: Identifiable {
     var backgroundColor: Color = .yellow
     var elements: [CardElement] = []
     
-    mutating func addElement(text: TextElement) {
-        elements.append(text)
-    }
-    
     mutating func addElement(uiImage: UIImage) {
         let element = ImageElement(uiImage: uiImage)
         elements.append(element)
-    }
+      }
+    
+    mutating func addElement(text: TextElement) {
+        elements.append(text)
+      }
+    
     mutating func addElements(from transfer: [CustomTransfer]) {
         for element in transfer {
             if let text = element.text {

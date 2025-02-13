@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+
 struct CustomTransfer: Transferable {
     var image: UIImage?
     var text: String?
-    public static var transferRepresentation: some
-    TransferRepresentation {
+    
+    public static var transferRepresentation: some TransferRepresentation {
         DataRepresentation(importedContentType: .image) { data in
             let image = UIImage(data: data)
             ?? UIImage(named: "error-image")

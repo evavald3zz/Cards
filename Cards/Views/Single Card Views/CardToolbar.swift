@@ -24,19 +24,11 @@ struct CardToolbar: ViewModifier {
                         dismiss()
                     }
                 }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    PasteButton(payloadType: CustomTransfer.self) { items in
-                        Task {
-                            card.addElements(from: items)
-                        }
-                    }
-                    .labelStyle(.iconOnly)
-                    .buttonBorderShape(.capsule)
-                }
                 ToolbarItem(placement: .bottomBar) {
                     BottomToolbar(
                         card: $card,
-                        modal: $currentModal)                }
+                        modal: $currentModal)
+                }
             }
             .sheet(item: $currentModal){ item in
                 switch item {
@@ -47,13 +39,13 @@ struct CardToolbar: ViewModifier {
                                 card.addElement(uiImage: stickerImage)
                             }
                             stickerImage = nil
-                        }                default:
+                        }
+                default:
                     Text(String(describing: item))
                 }
             }
     }
     var menu: some View {
-        // 1
         Menu {
             Button {
                 if UIPasteboard.general.hasImages {
@@ -68,12 +60,12 @@ struct CardToolbar: ViewModifier {
                             card.addElement(text: TextElement(text: text))
                         }
                     }
-                }            } label: {
-                    Label("Paste", systemImage: "doc.on.clipboard")
                 }
-            // 2
-                .disabled(!UIPasteboard.general.hasImages
-                          && !UIPasteboard.general.hasStrings)
+            } label: {
+                Label("Paste", systemImage: "doc.on.clipboard")
+            }
+            .disabled(!UIPasteboard.general.hasImages
+                      && !UIPasteboard.general.hasStrings)
         } label: {
             Label("Add", systemImage: "ellipsis.circle")
         }

@@ -6,14 +6,10 @@
 //
 
 import SwiftUI
-// 1
+
 extension UIImage: Transferable {
-    // 2
-    public static var transferRepresentation: some
-    TransferRepresentation {
-        // 3
+    public static var transferRepresentation: some TransferRepresentation {
         DataRepresentation(importedContentType: .image) { image in
-            // 4
             UIImage(data: image) ?? errorImage
         }
     }
