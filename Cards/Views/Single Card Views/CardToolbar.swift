@@ -17,26 +17,65 @@ struct CardToolbar: ViewModifier {
         content
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
+                    menu
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
                         dismiss()
                     }
                 }
-                ToolbarItem(placement: .bottomBar) {
-                    BottomToolbar(modal: $currentModal)
+                ToolbarItem(placement: .navigationBarLeading) {
+                    PasteButton(payloadType: CustomTransfer.self) { items in
+                        Task {
+                            card.addElements(from: items)
+                        }
+                    }
+                    .labelStyle(.iconOnly)
+                    .buttonBorderShape(.capsule)
                 }
+                ToolbarItem(placement: .bottomBar) {
+                    BottomToolbar(
+                        card: $card,
+                        modal: $currentModal)                }
             }
-            .sheet(item: $currentModal) { item in
+            .sheet(item: $currentModal){ item in
                 switch item {
                 case .stickerModal:
                     StickerModal(stickerImage: $stickerImage)
-                     .onDisappear {
-                     if let stickerImage = stickerImage {
-                     card.addElement(uiImage: stickerImage)
-                     }
-                     stickerImage = nil
-                     }                default:
+                        .onDisappear {
+                            if let stickerImage = stickerImage {
+                                card.addElement(uiImage: stickerImage)
+                            }
+                            stickerImage = nil
+                        }                default:
                     Text(String(describing: item))
                 }
             }
+    }
+    var menu: some View {
+        // 1
+        Menu {
+            Button {
+                if UIPasteboard.general.hasImages {
+                    if let images = UIPasteboard.general.images {
+                        for image in images {
+                            card.addElement(uiImage: image)
+                        }
+                    }
+                } else if UIPasteboard.general.hasStrings {
+                    if let strings = UIPasteboard.general.strings {
+                        for text in strings {
+                            card.addElement(text: TextElement(text: text))
+                        }
+                    }
+                }            } label: {
+                    Label("Paste", systemImage: "doc.on.clipboard")
+                }
+            // 2
+                .disabled(!UIPasteboard.general.hasImages
+                          && !UIPasteboard.general.hasStrings)
+        } label: {
+            Label("Add", systemImage: "ellipsis.circle")
+        }
     }
 }
