@@ -23,9 +23,9 @@ struct CardDetailView: View {
                 }
             ForEach($card.elements, id: \.id) { $element in
                 CardElementView(element: element)
-                    .border(
-                        Settings.borderColor,
-                        width: isSelected(element) ? Settings.borderWidth : 0)
+                    .overlay(
+                        element: element,
+                        isSelected: isSelected(element))
                     .elementContextMenu(
                         card: $card,
                         element: $element)
@@ -62,5 +62,26 @@ struct CardDetailView_Previews: PreviewProvider {
     static var previews: some View {
         CardDetailPreview()
             .environmentObject(CardStore(defaultData: true))
+    }
+}
+private extension View {
+    @ViewBuilder
+    func overlay(
+        element: CardElement,
+        isSelected: Bool
+    ) -> some View {
+        if isSelected,
+           let element = element as? ImageElement,
+           let frameIndex = element.frameIndex {
+            let shape = Shapes.shapes[frameIndex]
+            self.overlay(shape
+                .stroke(lineWidth: Settings.borderWidth)
+                .foregroundColor(Settings.borderColor))
+        } else {
+            self
+                .border(
+                    Settings.borderColor,
+                    width: isSelected ? Settings.borderWidth : 0)
+        }
     }
 }
