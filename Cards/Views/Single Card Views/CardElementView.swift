@@ -20,6 +20,7 @@ struct CardElementView: View {
         }
     }
 }
+
 struct ImageElementView: View {
     let element: ImageElement
     
@@ -42,6 +43,7 @@ struct TextElementView: View {
         }
     }
 }
+
 struct CardElementView_Previews: PreviewProvider {
     static var previews: some View {
         CardElementView(element: initialElements[0])

@@ -14,6 +14,7 @@ struct CardToolbar: ViewModifier {
     @Binding var card: Card
     @State private var stickerImage: UIImage?
     @State private var frameIndex: Int?
+    @State private var textElement = TextElement()
     
     func body(content: Content) -> some View {
         content
@@ -25,6 +26,19 @@ struct CardToolbar: ViewModifier {
                     Button("Done") {
                         dismiss()
                     }
+                }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    let uiImage = UIImage.screenshot(
+                        card: card,
+                        size: Settings.cardSize)
+                    let image = Image(uiImage: uiImage)
+                    ShareLink(
+                        item: image,
+                        preview: SharePreview(
+                            "Card",
+                            image: image)) {
+                                Image(systemName: "square.and.arrow.up")
+                            }
                 }
                 ToolbarItem(placement: .bottomBar) {
                     BottomToolbar(
@@ -51,6 +65,14 @@ struct CardToolbar: ViewModifier {
                                 card.addElement(uiImage: stickerImage)
                             }
                             stickerImage = nil
+                        }
+                case .textModal:
+                    TextModal(textElement: $textElement)
+                        .onDisappear {
+                            if !textElement.text.isEmpty {
+                                card.addElement(text: textElement)
+                            }
+                            textElement = TextElement()
                         }
                 default:
                     Text(String(describing: item))

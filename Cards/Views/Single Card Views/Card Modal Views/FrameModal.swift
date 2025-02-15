@@ -38,6 +38,7 @@ struct FrameModal: View {
         .padding(5)
     }
 }
+
 struct FrameModal_Previews: PreviewProvider {
     static var previews: some View {
         FrameModal(frameIndex: .constant(nil))

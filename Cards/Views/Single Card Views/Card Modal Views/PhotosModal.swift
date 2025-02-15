@@ -38,6 +38,7 @@ struct PhotosModal: View {
             }
     }
 }
+
 struct PhotosModal_Previews: PreviewProvider {
     static var previews: some View {
         PhotosModal(card: .constant(Card()))

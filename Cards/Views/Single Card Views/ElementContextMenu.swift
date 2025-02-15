@@ -25,13 +25,14 @@ struct ElementContextMenu: ViewModifier {
                     Label("Copy", systemImage: "doc.on.doc")
                 }
                 Button(role: .destructive) {
-                          card.remove(element)
+                    card.remove(element)
                 } label: {
                     Label("Delete", systemImage: "trash")
                 }
             }
     }
 }
+
 extension View {
     func elementContextMenu(
         card: Binding<Card>,

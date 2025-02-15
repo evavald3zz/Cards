@@ -5,7 +5,6 @@
 //  Created by M1_Tugo on 2/12/25.
 //
 
-
 import SwiftUI
 
 extension UIImage: Transferable {
@@ -114,5 +113,18 @@ extension UIImage {
         return UIGraphicsImageRenderer(size: size, format: format).image { _ in
             draw(in: CGRect(origin: .zero, size: size))
         }
+    }
+}
+
+extension UIImage {
+    @MainActor static func screenshot(
+        card: Card,
+        size: CGSize
+    ) -> UIImage {
+        let cardView = ShareCardView(card: card)
+        let content = cardView.content(size: size)
+        let renderer = ImageRenderer(content: content)
+        let uiImage = renderer.uiImage ?? UIImage.errorImage
+        return uiImage
     }
 }

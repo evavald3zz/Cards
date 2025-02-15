@@ -13,15 +13,18 @@ struct ResizableView: ViewModifier {
     @State private var previousRotation: Angle = .zero
     @State private var scale: CGFloat = 1.0
     
+    let viewScale: CGFloat
+    
     var dragGesture: some Gesture {
         DragGesture()
             .onChanged { value in
-                transform.offset = value.translation + previousOffset
+                transform.offset = value.translation / viewScale + previousOffset
             }
             .onEnded { _ in
                 previousOffset = transform.offset
             }
     }
+    
     var rotationGesture: some Gesture {
         RotationGesture()
             .onChanged { rotation in
@@ -32,6 +35,7 @@ struct ResizableView: ViewModifier {
                 previousRotation = .zero
             }
     }
+    
     var scaleGesture: some Gesture {
         MagnificationGesture()
             .onChanged { scale in
@@ -43,21 +47,23 @@ struct ResizableView: ViewModifier {
                 self.scale = 1.0
             }
     }
+    
     func body(content: Content) -> some View {
         content
             .frame(
-                width: transform.size.width,
-                height: transform.size.height)
+                width: transform.size.width * viewScale,
+                height: transform.size.height * viewScale)
             .rotationEffect(transform.rotation)
             .scaleEffect(scale)
-            .offset(transform.offset)
+            .offset(transform.offset * viewScale)
             .gesture(dragGesture)
-            .gesture(rotationGesture)
+            .gesture(SimultaneousGesture(rotationGesture, scaleGesture))
             .onAppear {
                 previousOffset = transform.offset
             }
     }
 }
+
 struct ResizableView_Previews: PreviewProvider {
     struct ResizableViewPreview: View {
         @State var transform = Transform()
@@ -73,7 +79,12 @@ struct ResizableView_Previews: PreviewProvider {
 }
 
 extension View {
-    func resizableView(transform: Binding<Transform>) -> some View {
-        modifier(ResizableView(transform: transform))
+    func resizableView(
+        transform: Binding<Transform>,
+        viewScale: CGFloat = 1.0
+    ) -> some View {
+        modifier(ResizableView(
+            transform: transform,
+            viewScale: viewScale))
     }
 }
